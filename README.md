@@ -32,7 +32,7 @@ Dockerized tool to build a custom Exosphere binary that spoofs the DeviceID. Thi
 1. Create the custom Exosphere binary to spoof the DeviceID.
 1. Boot the console using `fusee-primary.bin` or chainload it from Hekate.
 
-## How to create the custom Exosphere binary 
+## How to create the custom Exosphere binary with Docker
 
 This tool requires a volume mounted to the `/output` directory of the container, and the `DEVICEID` environment variable, with the DeviceID to spoof.
 
@@ -54,6 +54,25 @@ If booting via Hekate (without `fusee-primary.bin`), add this to the boot config
 ```ini
 secmon=Atmosphere/deviceid_exosphere.bin
 ```
+
+## How to create the custom Exosphere binary without Docker
+
+To build the same Exosphere custom binary without using the Docker image, you have to do the following manual steps first (for more details, just follow what is being done in the Dockerfile): 
+
+- Install DevKitPro
+- Install the required libraries to build Atmosphere
+- Clone Atmosphere into the commit/tag/branch you want
+- Go to the `exosphere` directory, inside the repo
+- Run the following command, to modify the GetDeviceId method, replacing the DEVICEID value the same way that was done in the dockerized build (tested only on linux):
+```bash
+DEVICEID=0x0022334455667788 sed -i "/u64 GetDeviceId() {/ s/$/ return $DEVICEID;/" ../libraries/libexosphere/source/fuse/fuse_api.cpp
+```
+- Build `exosphere`: 
+```bash
+make -j$(nproc) exosphere.bin
+```
+- Copy `exosphere.bin` to the `Atmosphere` directory in your SD card and follow the steps to configure it from the dockerized build.
+
 
 ## Considerations
 - **Important. Do not share your dumps and personalized builds.**. The `deviceid_exosphere.bin` is tied to a specific DeviceID and *must not be shared*. The same applies for the `PRODINFO`/`PRODINFOF` dumps. You may end up with a banned console.

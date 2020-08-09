@@ -75,8 +75,8 @@ make -j$(nproc) exosphere.bin
 
 
 ## Considerations
-- **Important. Do not share your dumps and personalized builds.**. The `deviceid_exosphere.bin` is tied to a specific DeviceID and *must not be shared*. The same applies for the `PRODINFO`/`PRODINFOF` dumps. You may end up with a banned console.
-- Doing this will potentialy leave you with more than one console with the same MAC address. Trying to connect both of them at the same time, to the same wireless network may result in an unexpected behavior.
+- **Important. Do not share your dumps and personalized builds.** The `deviceid_exosphere.bin` is tied to a specific DeviceID and *must not be shared*. The same applies for the `PRODINFO`/`PRODINFOF` dumps. You may end up with a banned console.
+- Doing this will potentialy leave you with more than one console with the same MAC address. Trying to connect both of them at the same time, to the same wireless network may result in an unexpected behavior. To modify your MAC address, edit the decrypted PRODINFO and modify the 0x6 bytes starting at 0x210 and use the CRC16 method described [here](https://switchbrew.org/wiki/Calibration) to properly fill the next 0x2 bytes.
 
 ## Acknowledgements:
 - **shchmue**, **Jan4V** and **SciresM** for all the patience answering questions and all the info about this and the *full nand transplant* options.

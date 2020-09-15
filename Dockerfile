@@ -47,6 +47,8 @@ RUN git switch -c deviceid-exosphere
 WORKDIR /Atmosphere/exosphere
 RUN make -j$(nproc) exosphere.bin
 
+RUN git config --global user.email "fake@name.com" && git config --global user.name Fake Name && git config --global color.ui false
+
 ADD build-deviceid-exosphere.sh .
 ADD deviceid.patch .
 

@@ -1,0 +1,25 @@
+From 12f4a7fad0adde8db7a18e72d94f9a2f364dcbdb Mon Sep 17 00:00:00 2001
+From: Fake Name <fake@name.com>
+Date: Tue, 15 Sep 2020 07:59:27 -0400
+Subject: [PATCH] deviceid
+
+---
+ libraries/libexosphere/source/fuse/fuse_api.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/libraries/libexosphere/source/fuse/fuse_api.cpp b/libraries/libexosphere/source/fuse/fuse_api.cpp
+index 17e4b256..eaee350c 100644
+--- a/libraries/libexosphere/source/fuse/fuse_api.cpp
++++ b/libraries/libexosphere/source/fuse/fuse_api.cpp
+@@ -275,7 +275,7 @@ namespace ams::fuse {
+         out->ecid[3] = static_cast<u32>(vendor);
+     }
+ 
+-    u64 GetDeviceId() {
++    u64 GetDeviceId() { return ###DEVICEID###;
+         /* Get the registers. */
+         volatile auto &chip = GetChipRegistersCommon();
+ 
+-- 
+2.28.0
+

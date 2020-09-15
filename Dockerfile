@@ -48,5 +48,6 @@ WORKDIR /Atmosphere/exosphere
 RUN make -j$(nproc) exosphere.bin
 
 ADD build-deviceid-exosphere.sh .
+ADD deviceid.patch .
 
 ENTRYPOINT [ "/Atmosphere/exosphere/build-deviceid-exosphere.sh" ]

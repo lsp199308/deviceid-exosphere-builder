@@ -10,7 +10,9 @@ if [[ ! -d "/output" ]]; then
     exit 1
 fi
 
-sed -i "/u64 GetDeviceId() {/ s/$/ return $DEVICEID;/" ../libraries/libexosphere/source/fuse/fuse_api.cpp
+sed -i "s/###DEVICEID###/$DEVICEID/g" deviceid.patch
+git am deviceid.patch
+
 rm -rf ../libraries/libexosphere/lib_nintendo_nx_arm
 rm -rf ../libraries/libexosphere/lib_nintendo_nx_arm64
 rm ../libraries/libexosphere/build_nintendo_nx_arm/fuse_api.*

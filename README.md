@@ -37,9 +37,11 @@ Dockerized tool to build a custom Exosphere binary that spoofs the DeviceID. Thi
 This tool requires a volume mounted to the `/output` directory of the container, and the `DEVICEID` environment variable, with the DeviceID to spoof.
 
 Either build the docker image locally or use the prebuilt image from Dockerhub, replacing the `DEVICEID` value with your DeviceID (keep the `00` before your DeviceID. If the output from NxNandManager was `NX1122334455667788-0`, the value to use should be: `0x0022334455667788`. ):
+(if you want to use a specific Atmosphere version, change the `latest` docker tag with the Atmosphere version number, like `0.14.4`)
 
 ```bash
 mkdir -p ./output
+docker pull pablozaiden/deviceid-exosphere-builder:latest
 docker run -ti --rm -e DEVICEID=0x0022334455667788 -v "$PWD"/output:/output pablozaiden/deviceid-exosphere-builder:latest
 ```
 

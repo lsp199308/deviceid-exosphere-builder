@@ -1,7 +1,7 @@
 ARG DEBIAN_FRONTEND=noninteractive
 ARG DEVKITPRO_URL=https://github.com/devkitPro/pacman/releases/download/v1.0.2/
 ARG DEVKITPRO_FILE=devkitpro-pacman.amd64.deb
-ARG ATMOSPHERE_TAG=0.16.2
+ARG ATMOSPHERE_TAG=0.17.0
 
 FROM ubuntu:focal
 

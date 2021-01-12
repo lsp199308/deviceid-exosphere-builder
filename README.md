@@ -65,15 +65,18 @@ To build the same Exosphere custom binary without using the Docker image, you ha
 - Install DevKitPro
 - Install the required libraries to build Atmosphere
 - Clone Atmosphere into the commit/tag/branch you want
+- Copy the `deviceid.patch` file from this repo into the Atmosphere directory
+- Run the following command, to modify the DeviceId value in the patch and apply the patch (tested only on linux):
+    ```bash
+    DEVICEID=0x0022334455667788 sed -i "s/###DEVICEID###/$DEVICEID/g" deviceid.patch
+
+    git am deviceid.patch
+    ```
 - Go to the `exosphere` directory, inside the repo
-- Run the following command, to modify the GetDeviceId method, replacing the DEVICEID value the same way that was done in the dockerized build (tested only on linux):
-```bash
-DEVICEID=0x0022334455667788 sed -i "/u64 GetDeviceId() {/ s/$/ return $DEVICEID;/" ../libraries/libexosphere/source/fuse/fuse_api.cpp
-```
 - Build `exosphere`: 
-```bash
-make -j$(nproc) exosphere.bin
-```
+    ```bash
+    make -j$(nproc) exosphere.bin
+    ```
 - Copy `exosphere.bin` to the `Atmosphere` directory in your SD card and follow the steps to configure it from the dockerized build.
 
 

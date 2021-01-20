@@ -68,7 +68,8 @@ To build the same Exosphere custom binary without using the Docker image, you ha
 - Copy the `deviceid.patch` file from this repo into the Atmosphere directory
 - Run the following command, to modify the DeviceId value in the patch and apply the patch (tested only on linux):
     ```bash
-    DEVICEID=0x0022334455667788 sed -i "s/###DEVICEID###/$DEVICEID/g" deviceid.patch
+    export DEVICEID=0x0022334455667788
+    sed -i "s/###DEVICEID###/$DEVICEID/g" deviceid.patch
 
     git am deviceid.patch
     ```

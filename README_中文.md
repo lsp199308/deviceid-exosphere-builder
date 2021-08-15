@@ -7,6 +7,7 @@
 # 要求：
 # 视窗
 - 一个完整的ns EMMC 备份（ns A）
+
 -能够连接到电脑具有完好的硬件但没有EMMC 备份的ns（ns B）
 - [NxNandManager](https://github.com/eliboa/NxNandManager)
 - [HackDiskMount](https://files.sshnuke.net/HacDiskMount1055.zip)

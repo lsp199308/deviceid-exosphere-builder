@@ -29,7 +29,7 @@
 
 7：关闭 NxNandManager。
 
-8：按照本 [this guide](https://bbs.naxgen.cn/forum.php?mod=viewthread&tid=241848&fromuid=2627124)重新创建其余的 EMMC 分区,直到并包括步骤 12。请勿尝试启动NS。
+8：按照本 [91wii](https://bbs.naxgen.cn/forum.php?mod=viewthread&tid=241848&fromuid=2627124)重新创建其余的 EMMC 分区,直到并包括步骤 12。请勿尝试启动NS。
 
 9：在SYSTEM分区上，删除文件夹中以.结尾的文件,save文夹下除8000000000000120外所有文件。不这样做可能会导致启动期间switch冻结或启动 Atmosphere 显示错误。
 
@@ -41,11 +41,14 @@
 
 
 ##  如何使用 Docker 创建自定义 Exosphere 二进制文件
--这个工具需要一个挂载到/output容器目录的卷，以及DEVICEID环境变量，用DeviceID来欺骗。
 
--要么在本地构建 docker 镜像，要么使用来自 Dockerhub 的预构建镜像，用DEVICEID您的 DeviceID替换该值（保留00DeviceID 之前的值。如果 NxNandManager 的输出是NX1122334455667788-0，则要使用的值应该是：0x0022334455667788. ）：
+这个工具需要一个挂载到/output容器目录的卷，以及DEVICEID环境变量，用DeviceID来欺骗。
 
--（如果您想使用特定的 Atmosphere 版本，请latest使用 Atmosphere 版本号更改docker 标签，例如0.19.5）
+
+要么在本地构建 docker 镜像，要么使用来自 Dockerhub 的预构建镜像，用DEVICEID您的 DeviceID替换该值（保留00DeviceID 之前的值。如果 NxNandManager 的输出是NX1122334455667788-0，则要使用的值应该是：0x0022334455667788. ）：
+
+
+（如果您想使用特定的 Atmosphere 版本，请latest使用 Atmosphere 版本号更改docker 标签，例如0.19.5）
 
 
 
@@ -56,7 +59,8 @@ docker run -ti --rm -e DEVICEID=0x0022334455667788 -v "$PWD"/output:/output pabl
 ```
 
 
--构建完成后，将output/deviceid_exosphere.bin文件复制到Atmosphere您的 SD 卡目录，并将以下条目添加到BCT.ini：
+
+构建完成后，将output/deviceid_exosphere.bin文件复制到Atmosphere您的 SD 卡目录，并将以下条目添加到BCT.ini：
 
 
 
@@ -76,13 +80,19 @@ secmon=Atmosphere/deviceid_exosphere.bin
 
 ```
 ##  如何在没有 Docker 的情况下创建自定义 Exosphere 二进制文件
--要在不使用 Docker 映像的情况下构建相同的 Exosphere 自定义二进制文件，您必须首先执行以下手动步骤（有关更多详细信息，只需按照 Dockerfile 中的操作进行操作）：
 
--安装 DevKitPro
--安装构建 Atmosphere 所需的库
--将 Atmosphere 克隆到你想要的 commit/tag/branch
--将deviceid.patch这个 repo 中的文件复制到 Atmosphere 目录中
--运行以下命令，修改补丁中的DeviceId值并应用补丁（仅在linux上测试）：
+要在不使用 Docker 映像的情况下构建相同的 Exosphere 自定义二进制文件，您必须首先执行以下手动步骤（有关更多详细信息，只需按照 Dockerfile 中的操作进行操作）：
+
+
+安装 DevKitPro
+
+安装构建 Atmosphere 所需的库
+
+将 Atmosphere 克隆到你想要的 commit/tag/branch
+
+将deviceid.patch这个 repo 中的文件复制到 Atmosphere 目录中
+
+运行以下命令，修改补丁中的DeviceId值并应用补丁（仅在linux上测试）：
  
  
  ```bash
@@ -93,8 +103,10 @@ secmon=Atmosphere/deviceid_exosphere.bin
  
  
  ```
-- 转到exosphere
-- Build `exosphere`: 
+-
+转到exosphere
+
+Build `exosphere`: 
  
  
  ```bash
@@ -102,9 +114,12 @@ secmon=Atmosphere/deviceid_exosphere.bin
 
 
 ```
--复制exosphere.bin到AtmosphereSD 卡中的目录，然后按照步骤从 dockerized 构建中配置它。
+
+
+复制exosphere.bin到AtmosphereSD 卡中的目录，然后按照步骤从 dockerized 构建中配置它。
 # 注意事项
 ## 不要共享您的转储。将deviceid_exosphere.bin被绑定到特定的DeviceID不能共享。这同样适用于PRODINFO/PRODINFOF转储。你最终可能会得到一个被禁止的SWITCH。
 这样做可能会让您拥有多个具有相同 MAC 地址的SWITCH。尝试将它们同时连接到同一个无线网络可能会导致意外行为。要修改您的 MAC 地址，请编辑解密的 PRODINFO 并修改从 0x210 开始的 0x6 字节，并使用[here](https://switchbrew.org/wiki/Calibration)描述的 CRC16 方法正确填充接下来的 0x2 字节。
 ##  致谢：
-- **shchmue**, **Jan4V** and **SciresM** 的耐心回答问题以及有关此问题的所有信息以及完整的 nand 移植选项
+
+**shchmue**, **Jan4V** and **SciresM** 的耐心回答问题以及有关此问题的所有信息以及完整的 nand 移植选项

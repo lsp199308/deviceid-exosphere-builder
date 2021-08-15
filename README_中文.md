@@ -18,17 +18,28 @@
 1：使用ns A或其备份中打开 EMMC ，并使用 NxNandManager 。
 
 2：记下DeviceID，不带首字母NX和-0末尾的( 或其他任何内容 )，跳过前两位数字。例如，如果它说：NX1122334455667788-0，您需要写下的部分将是：22334455667788。
+
 3：从ns A转储、解密的PRODINFO和PRODINFOF分区。
 
 4：关闭 NxNandManager。
+
 5：使用ns B ，通过 NxNandManager从ns B打开 EMMC 。它可能会说它有BAD CRYPTO。这在未知的 EMMC 上是预料之中。
+
 6：恢复解密的PRODINFO和PRODINFOF从NS A分区到NS B.
+
 7：关闭 NxNandManager。
+
 8：按照本 [this guide](https://bbs.naxgen.cn/forum.php?mod=viewthread&tid=241848&fromuid=2627124)重新创建其余的 EMMC 分区,直到并包括步骤 12。请勿尝试启动NS。
+
 9：在SYSTEM分区上，删除文件夹中以.结尾的文件,save文夹下除8000000000000120外所有文件。不这样做可能会导致启动期间switch冻结或启动 Atmosphere 显示错误。
+
 10：将最新版本的 Hekate 和 Atmosphere 放在您的 SD 卡上。
+
 11：创建自定义 Exosphere 二进制文件以欺骗 DeviceID。
+
 12：使用fusee-primary.bin或从 Hekate FSS0加载它来启动ns。
+
+
 ##  如何使用 Docker 创建自定义 Exosphere 二进制文件
 -这个工具需要一个挂载到/output容器目录的卷，以及DEVICEID环境变量，用DeviceID来欺骗。
 
@@ -36,21 +47,33 @@
 
 -（如果您想使用特定的 Atmosphere 版本，请latest使用 Atmosphere 版本号更改docker 标签，例如0.19.5）
 
+
+
 ```bash
 mkdir -p ./output
 docker pull pablozaiden/deviceid-exosphere-builder:latest
 docker run -ti --rm -e DEVICEID=0x0022334455667788 -v "$PWD"/output:/output pablozaiden/deviceid-exosphere-builder:latest
 ```
+
+
 -构建完成后，将output/deviceid_exosphere.bin文件复制到Atmosphere您的 SD 卡目录，并将以下条目添加到BCT.ini：
+
+
 
 ```ini
 [stage2]
 exosphere = Atmosphere/deviceid_exosphere.bin
+
+
 ```
+
 如果通过 Hekate（没有fusee-primary.bin）启动，请将其添加到启动配置中以获取自定义 exosphere 二进制文件：
+
+
 
 ```ini
 secmon=Atmosphere/deviceid_exosphere.bin
+
 ```
 ##  如何在没有 Docker 的情况下创建自定义 Exosphere 二进制文件
 -要在不使用 Docker 映像的情况下构建相同的 Exosphere 自定义二进制文件，您必须首先执行以下手动步骤（有关更多详细信息，只需按照 Dockerfile 中的操作进行操作）：
@@ -60,17 +83,25 @@ secmon=Atmosphere/deviceid_exosphere.bin
 -将 Atmosphere 克隆到你想要的 commit/tag/branch
 -将deviceid.patch这个 repo 中的文件复制到 Atmosphere 目录中
 -运行以下命令，修改补丁中的DeviceId值并应用补丁（仅在linux上测试）：
-    ```bash
+ 
+ 
+ ```bash
     export DEVICEID=0x0022334455667788
     sed -i "s/###DEVICEID###/$DEVICEID/g" deviceid.patch
 
     git am deviceid.patch
-    ```
+ 
+ 
+ ```
 - 转到exosphere
 - Build `exosphere`: 
-    ```bash
+ 
+ 
+ ```bash
     make -j$(nproc) exosphere.bin
-    ```
+
+
+```
 -复制exosphere.bin到AtmosphereSD 卡中的目录，然后按照步骤从 dockerized 构建中配置它。
 # 注意事项
 ## 不要共享您的转储。将deviceid_exosphere.bin被绑定到特定的DeviceID不能共享。这同样适用于PRODINFO/PRODINFOF转储。你最终可能会得到一个被禁止的SWITCH。

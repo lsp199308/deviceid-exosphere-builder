@@ -48,7 +48,7 @@
 要么在本地构建 docker 镜像，要么使用来自 Dockerhub 的预构建镜像，用DEVICEID您的 DeviceID替换该值（保留00DeviceID 之前的值。如果 NxNandManager 的输出是NX1122334455667788-0，则要使用的值应该是：0x0022334455667788. ）：
 
 
-（如果您想使用特定的 Atmosphere 版本，请将Dockerfile中Atmosphere版本号，例如0.19.5）
+（如果您想使用特定的 Atmosphere 版本，请更改Dockerfile中Atmosphere版本号，例如0.19.5）
 
 
 

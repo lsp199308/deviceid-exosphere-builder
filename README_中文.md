@@ -15,18 +15,20 @@
 - 最新 [Hekate](https://github.com/CTCaer/hekate/releases)
 - 最新 [Atmosphere](https://github.com/Atmosphere-NX/Atmosphere/releases/)
 # 教程
--使用ns A或其备份中打开 EMMC ，并使用 NxNandManager 。
--记下DeviceID，不带首字母NX和-0末尾的( 或其他任何内容 )，跳过前两位数字。例如，如果它说：NX1122334455667788-0，您需要写下的部分将是：22334455667788。
--从ns A转储、解密的PRODINFO和PRODINFOF分区。
--关闭 NxNandManager。
--使用ns B ，通过 NxNandManager从ns B打开 EMMC 。它可能会说它有BAD CRYPTO。这在未知的 EMMC 上是预料之中。
--恢复解密的PRODINFO和PRODINFOF从NS A分区到NS B.
--关闭 NxNandManager。
--按照本 [this guide](https://bbs.naxgen.cn/forum.php?mod=viewthread&tid=241848&fromuid=2627124)重新创建其余的 EMMC 分区,直到并包括步骤 12。请勿尝试启动NS。
--在SYSTEM分区上，删除文件夹中以.结尾的文件,save文夹下除8000000000000120外所有文件。不这样做可能会导致启动期间switch冻结或启动 Atmosphere 显示错误。
--将最新版本的 Hekate 和 Atmosphere 放在您的 SD 卡上。
--创建自定义 Exosphere 二进制文件以欺骗 DeviceID。
--使用fusee-primary.binHekate 或从 Hekate FSS0加载它来启动ns。
+1：使用ns A或其备份中打开 EMMC ，并使用 NxNandManager 。
+
+2：记下DeviceID，不带首字母NX和-0末尾的( 或其他任何内容 )，跳过前两位数字。例如，如果它说：NX1122334455667788-0，您需要写下的部分将是：22334455667788。
+3：从ns A转储、解密的PRODINFO和PRODINFOF分区。
+
+4：关闭 NxNandManager。
+5：使用ns B ，通过 NxNandManager从ns B打开 EMMC 。它可能会说它有BAD CRYPTO。这在未知的 EMMC 上是预料之中。
+6：恢复解密的PRODINFO和PRODINFOF从NS A分区到NS B.
+7：关闭 NxNandManager。
+8：按照本 [this guide](https://bbs.naxgen.cn/forum.php?mod=viewthread&tid=241848&fromuid=2627124)重新创建其余的 EMMC 分区,直到并包括步骤 12。请勿尝试启动NS。
+9：在SYSTEM分区上，删除文件夹中以.结尾的文件,save文夹下除8000000000000120外所有文件。不这样做可能会导致启动期间switch冻结或启动 Atmosphere 显示错误。
+10：将最新版本的 Hekate 和 Atmosphere 放在您的 SD 卡上。
+11：创建自定义 Exosphere 二进制文件以欺骗 DeviceID。
+12：使用fusee-primary.bin或从 Hekate FSS0加载它来启动ns。
 ##  如何使用 Docker 创建自定义 Exosphere 二进制文件
 -这个工具需要一个挂载到/output容器目录的卷，以及DEVICEID环境变量，用DeviceID来欺骗。
 

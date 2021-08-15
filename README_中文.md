@@ -2,10 +2,10 @@
 
 #  如何移植 PRODINFO/PRODINFOF 并从头开始重新创建其他 EMMC 分区
 #  警告！！！
--此过程仅用于在丢失PRODINFO/PRODINFOF分区的内容后将ns引导回 hos，这并不是要取消您的ns禁令。如果您尝试这样做，最有可能的结果是您最终会得到另一个被禁止的ns，从现在开始避免任何形式的盗版，不要在线使用移植的ns
+- 此过程仅用于在丢失PRODINFO/PRODINFOF分区的内容后将ns引导回 hos，这并不是要取消您的ns禁令。如果您尝试这样做，最有可能的结果是您最终会得到另一个被禁止的ns，从现在开始避免任何形式的盗版，不要在线使用移植的ns
 
 # 要求：
-# 视窗
+# WINDOWS
 - 一个完整的ns EMMC 备份（ns A）
 - 能够连接到电脑具有完好的硬件但没有EMMC 备份的ns（ns B）
 - [NxNandManager](https://github.com/eliboa/NxNandManager)
@@ -48,7 +48,7 @@
 要么在本地构建 docker 镜像，要么使用来自 Dockerhub 的预构建镜像，用DEVICEID您的 DeviceID替换该值（保留00DeviceID 之前的值。如果 NxNandManager 的输出是NX1122334455667788-0，则要使用的值应该是：0x0022334455667788. ）：
 
 
-（如果您想使用特定的 Atmosphere 版本，请latest使用 Atmosphere 版本号更改docker 标签，例如0.19.5）
+（如果您想使用特定的 Atmosphere 版本，请将Dockerfile中Atmosphere版本号，例如0.19.5）
 
 
 

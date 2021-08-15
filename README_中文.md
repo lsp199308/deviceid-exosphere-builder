@@ -7,29 +7,27 @@ Dockerized 工具，用于构建欺骗 DeviceID 的自定义 Exosphere 二进制
 
 # 要求：
 # 视窗
-一个完整的ns EMMC 备份（ns A），或运行最新 Hekate 的ns，连接到 PC
-具有工作硬件但没有工作 EMMC 备份的ns（ns B）
-- A working console full EMMC backup (*Console A*), or that console running latest Hekate, connected to the PC
-- A console with working hardware, but without a working EMMC backup (*Console B*)
+- 一个完整的ns EMMC 备份（ns A）
+-能够连接到电脑具有完好的硬件但没有EMMC 备份的ns（ns B）
 - [NxNandManager](https://github.com/eliboa/NxNandManager)
 - [HackDiskMount](https://files.sshnuke.net/HacDiskMount1055.zip)
 - BIS keys for Console A and B
 - Docker
-- Latest [Hekate](https://github.com/CTCaer/hekate/releases)
-- Latest [Atmosphere](https://github.com/Atmosphere-NX/Atmosphere/releases/)
+- 最新 [Hekate](https://github.com/CTCaer/hekate/releases)
+- 最新 [Atmosphere](https://github.com/Atmosphere-NX/Atmosphere/releases/)
 # 教程
 使用ns A或其备份中打开 EMMC ，并使用 NxNandManager 。
 记下DeviceID，不带首字母NX和-0末尾的( 或其他任何内容 )，跳过前两位数字。例如，如果它说：NX1122334455667788-0，您需要写下的部分将是：22334455667788。
-从ns A转储、解密PRODINFO和PRODINFOF分区。
+从ns A转储、解密的PRODINFO和PRODINFOF分区。
 关闭 NxNandManager。
-使用ns B ，通过 NxNandManager从ns B打开 EMMC 。它可能会说它有BAD CRYPTO。这在 nuked EMMC 上是预料之中的。
-恢复解密PRODINFO和PRODINFO从NS A分区到NS B.
+使用ns B ，通过 NxNandManager从ns B打开 EMMC 。它可能会说它有BAD CRYPTO。这在未知的 EMMC 上是预料之中。
+恢复解密的PRODINFO和PRODINFOF从NS A分区到NS B.
 关闭 NxNandManager。
-按照本 [this guide](https://switch.homebrew.guide/usingcfw/manualchoiupgrade.html)重新创建其余的 EMMC 分区,直到并包括步骤 12。请勿尝试启动控制台。
-在SYSTEM分区上，删除文件夹中以.结尾的文件,save文夹除120外所有文件。不这样做可能会导致启动期间switch冻结或启动 Atmosphere 显示错误。
+按照本 [this guide](https://bbs.naxgen.cn/forum.php?mod=viewthread&tid=241848&fromuid=2627124)重新创建其余的 EMMC 分区,直到并包括步骤 12。请勿尝试启动NS。
+在SYSTEM分区上，删除文件夹中以.结尾的文件,save文夹下除8000000000000120外所有文件。不这样做可能会导致启动期间switch冻结或启动 Atmosphere 显示错误。
 将最新版本的 Hekate 和 Atmosphere 放在您的 SD 卡上。
 创建自定义 Exosphere 二进制文件以欺骗 DeviceID。
-使用fusee-primary.binHekate 或从 Hekate 链式加载它来启动ns。
+使用fusee-primary.binHekate 或从 Hekate FSS0加载它来启动ns。
 ##  如何使用 Docker 创建自定义 Exosphere 二进制文件
 这个工具需要一个挂载到/output容器目录的卷，以及DEVICEID环境变量，用DeviceID来欺骗。
 

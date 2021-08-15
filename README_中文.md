@@ -1,5 +1,4 @@
-#  DeviceID Exosphere Builder
-Dockerized 工具，用于构建欺骗 DeviceID 的自定义 Exosphere 二进制文件。这可用于在带有移植PRODINFO/PRODINFOF分区的 Nintendo Switch 中启动 Hos
+#  Dockerized 工具，用于构建欺骗 DeviceID 的自定义 Exosphere 二进制文件。这可用于在带有移植PRODINFO/PRODINFOF分区的 Nintendo Switch 中启动 Hos
 
 #  如何移植 PRODINFO/PRODINFOF 并从头开始重新创建其他 EMMC 分区
 #  警告！！！
